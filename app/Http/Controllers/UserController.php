@@ -19,7 +19,8 @@ class UserController extends Controller
 	
 	
 	public function profile() {
-		return view('accounts.profile');
+		$user = Auth::user();
+		return view('accounts.profile', compact('user'));
 	}
 
 	public function changePassword() {
