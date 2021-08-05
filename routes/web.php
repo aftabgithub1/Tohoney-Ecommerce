@@ -108,6 +108,7 @@ Route::get('multiple_images_delete/{id}', [ProductMultipleImageController::class
 Route::post('order', [OrderController::class, 'order'])->name('order');
 Route::get('order_invoice/{id}', [OrderController::class, 'orderInvoice'])->name('order_invoice');
 Route::get('order_pdf/{id}', [OrderController::class, 'orderPdf'])->name('order_pdf');
+Route::get('send_sms/{id}', [OrderController::class, 'sendSms'])->name('send_sms');
 
 /** 
  * STRIPE

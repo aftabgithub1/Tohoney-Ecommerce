@@ -53,4 +53,28 @@ class OrderController extends Controller
     return $order_pdf->download($order_pdf_file);
 	}
 
+	public function sendSms($id) {
+		$order = Order::find($id);
+		$url = "http://66.45.237.70/api.php";
+		$number= $order->phone_no;
+		$text="Order ID: $order->id, Total Payment: $order->total <br> Your payment received successfully!";
+		$data= array(
+		'username'=>"UserName",
+		'password'=>"******",
+		'number'=>"$number",
+		'message'=>"$text"
+		);
+
+		$ch = curl_init(); // Initialize cURL
+		curl_setopt($ch, CURLOPT_URL,$url);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$smsresult = curl_exec($ch);
+		$p = explode("|",$smsresult);
+		$sendstatus = $p[0];
+		if($sendstatus == 1101) {
+			return back()->with('sms_sent_success', 'SMS sent successfully!');
+		}
+	}
+
 }

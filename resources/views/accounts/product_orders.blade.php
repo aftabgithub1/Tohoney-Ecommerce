@@ -26,6 +26,12 @@ active
               <strong>Success ! </strong>{{ session('delete_success') }}
             </div>
           @endif
+          
+          @if(session('sms_sent_success'))
+            <div class="alert alert-success mt-4">
+              <strong>Success ! </strong>{{ session('sms_sent_success') }}
+            </div>
+          @endif
           <table class="table mt-4">
             <tr>
               <th>#</th>
@@ -54,7 +60,8 @@ active
                     <a class="dropdown-item" href="{{route('order_invoice', $product_order->id)}}">View Invoice</a>
                     <a class="dropdown-item" href="">Delete</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-success" href="{{route('order_pdf', $product_order->id)}}">Download PDF</a>
+                    <a class="dropdown-item text-primary" href="{{route('order_pdf', $product_order->id)}}">Download PDF</a>
+                    <a class="dropdown-item text-primary" href="{{route('send_sms', $product_order->id)}}">Send SMS</a>
                   </div>
                 </div>
               </td>

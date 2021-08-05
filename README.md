@@ -5,6 +5,7 @@ In the users table, there is a column named 'role'. Customer role is auto create
 ## Packages installed
 * Stripe
 * DomPDF
+* Bulk SMS
 
 
 
