@@ -58,7 +58,7 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="product-single-content">
-						<h3>{{$product_details->name}}</h3>
+						<h3>{{$product_details->product_name}}</h3>
 						<div class="rating-wrap fix">
 							<span class="pull-left">Tk.{{$product_details->price}}</span>
 							<ul class="rating pull-right">
@@ -230,57 +230,69 @@
 							</div>
 							<div class="add-review">
 								<h4>Add A Review</h4>
-								<div class="ratting-wrap">
-									<table>
-										<thead>
-											<tr>
-												<th>task</th>
-												<th>1 Star</th>
-												<th>2 Star</th>
-												<th>3 Star</th>
-												<th>4 Star</th>
-												<th>5 Star</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>How Many Stars?</td>
-												<td>
-													<input type="radio" name="a" />
-												</td>
-												<td>
-													<input type="radio" name="a" />
-												</td>
-												<td>
-													<input type="radio" name="a" />
-												</td>
-												<td>
-													<input type="radio" name="a" />
-												</td>
-												<td>
-													<input type="radio" name="a" />
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-12">
-										<h4>Name:</h4>
-										<input type="text" placeholder="Your name here..." />
-									</div>
-									<div class="col-md-6 col-12">
-										<h4>Email:</h4>
-										<input type="email" placeholder="Your Email here..." />
-									</div>
-									<div class="col-12">
-										<h4>Your Review:</h4>
-										<textarea name="massage" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
-									</div>
-									<div class="col-12">
-										<button class="btn-style">Submit</button>
-									</div>
-								</div>
+								
+								@php 
+									$order_list = App\Models\OrderList::where('user_id', Auth::id())->where('product_id', $product_details->id);
+								@endphp
+
+								@auth
+									@if($order_list->exists())
+										@if($order_list->whereNull('review')->exists())
+											<form action="{{route('add_review', ['id' => $order_list->whereNull('review')->first()->id])}}" method="post">
+												@csrf
+												<div class="ratting-wrap">
+													<table>
+														<thead>
+															<tr>
+																<th>task</th>
+																<th>1 Star</th>
+																<th>2 Star</th>
+																<th>3 Star</th>
+																<th>4 Star</th>
+																<th>5 Star</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>How Many Stars?</td>
+																<td>
+																	<input type="radio" name="star" value="1"/>
+																</td>
+																<td>
+																	<input type="radio" name="star" value="2"/>
+																</td>
+																<td>
+																	<input type="radio" name="star" value="3"/>
+																</td>
+																<td>
+																	<input type="radio" name="star" value="4"/>
+																</td>
+																<td>
+																	<input type="radio" name="star" value="5"/>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="row">
+													<div class="col-12">
+														<h4>Your Review:</h4>
+														<textarea name="review" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
+													</div>
+													<div class="col-12">
+														<button type="submit" class="btn-style">Submit</button>
+													</div>
+												</div>
+											</form>
+										@else
+											<p class="text-danger">You have already reviewed this product.</p>
+										@endif
+									@else
+										<p class="text-danger">You havn't purcase this product yet.</p>
+									@endif
+								@else
+									<p>Please <a href="{{route('login')}}" class="btn btn-success" style="border-radius: 20px; padding: 0 10px">Login</a> to review option</p>
+								@endauth
 							</div>
 						</div>
 					</div>
@@ -309,7 +321,7 @@
 						<div class="featured-product-content">
 							<div class="row">
 								<div class="col-7">
-									<h3><a href="{{route('product.show', $related_product->slug)}}">{{$related_product->name}}</a></h3>
+									<h3><a href="{{route('product.show', $related_product->slug)}}">{{$related_product->product_name}}</a></h3>
 									<p>Tk.{{$related_product->price}}</p>
 								</div>
 								<div class="col-5 text-right">

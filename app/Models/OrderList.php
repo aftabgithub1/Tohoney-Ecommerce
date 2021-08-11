@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class OrderList extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['review', 'star'];
 }

@@ -28,13 +28,13 @@
 					@php 
 						$auth = Auth::user();
 						$carts = App\Models\Cart::all();
-
 					@endphp
 					<form action="{{route('order')}}" method="post">
 						@csrf
 						<div class="row">
 							<div class="col-sm-6 col-12">
 								<p>First Name *</p>
+								<input type="text" name="user_id" value="{{$auth->id ?? ''}} " hidden>
 								<input type="text" name="name" value="{{$auth->name ?? ''}}">
 							</div>
 							<div class="col-sm-6 col-12">
@@ -91,6 +91,7 @@
 						</li>
 					</ul>
 					<input type="text" name="subtotal" value="{{$subtotal}}" hidden>
+					<input type="text" name="discount" value="{{$discount_price}}" hidden>
 					<input type="text" name="total" value="{{$total}}" hidden>
 					<button type="submit">Place Order</button>
 					</form>

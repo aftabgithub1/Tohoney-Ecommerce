@@ -90,7 +90,7 @@ class ProductController extends Controller
 			]);
 
 			$product->category_id = $request->category_id;
-			$product->name = $request->name;
+			$product->product_name = $request->product_name;
 			$product->price = $request->price;
 			$product->short_desp = $request->short_desp;
 			$product->long_desp = $request->long_desp;

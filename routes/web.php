@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductMultipleImageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RoleMgmtController;
 use App\Http\Controllers\TrashController;
 use App\Http\Controllers\StripePaymentController;
 
@@ -46,7 +47,6 @@ Route::get('cart/{coupon_name}', [FrontendController::class, 'apllyCoupon']);
 Route::get('shop', [FrontendController::class, 'shop']);
 Route::match(['get', 'post'], 'checkout', [FrontendController::class, 'checkout'])->name('checkout');
 
-
 /**
  * ADMIN
  */
@@ -57,7 +57,7 @@ Route::get('user_list', [AdminController::class, 'userList']);
  * CUSTOMER
  */
 Route::get('customer_panel', [CustomerController::class, 'customerPanel']);
-Route::get('product_orders', [CustomerController::class, 'productOrders']);
+
 
 /**
  * USER
@@ -106,6 +106,9 @@ Route::get('multiple_images_delete/{id}', [ProductMultipleImageController::class
  * ORDER
  */
 Route::post('order', [OrderController::class, 'order'])->name('order');
+Route::post('add_review', [OrderController::class, 'addReview'])->name('add_review');
+Route::get('delete_order/{id}', [OrderController::class, 'deleteOrder'])->name('delete_order');
+Route::get('product_orders', [OrderController::class, 'productOrders']);
 Route::get('order_invoice/{id}', [OrderController::class, 'orderInvoice'])->name('order_invoice');
 Route::get('order_pdf/{id}', [OrderController::class, 'orderPdf'])->name('order_pdf');
 Route::get('send_sms/{id}', [OrderController::class, 'sendSms'])->name('send_sms');
@@ -115,14 +118,23 @@ Route::get('send_sms/{id}', [OrderController::class, 'sendSms'])->name('send_sms
  */
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
-/* Routes for resource controller :
+/**
+ * ROLE MANAGEMENT
+ */
+Route::get('add_role_and_permission', [RoleMgmtController::class, 'addRoleAndPermission'])->name('add_role_and_permission');
+Route::post('role_create', [RoleMgmtController::class, 'roleCreate']);
+Route::post('permission_create', [RoleMgmtController::class, 'permissionCreate'])->name('add_role_and_permission');
+Route::post('add_user_role', [RoleMgmtController::class, 'addUserRole'])->name('add_user_role');
 
+/**
+ * RESOURCE CONTROLLERS
+ */
+/* 
+Routes for resource controller :
 Route::resource('category', CategoryController::class);
 Route::resource('product', ProductController::class);
-Route::resource('coupon', CouponController::class);
 
 or, we can use array as follows, */
-
 Route::resources([
   'category' => CategoryController::class,
   'product' => ProductController::class,

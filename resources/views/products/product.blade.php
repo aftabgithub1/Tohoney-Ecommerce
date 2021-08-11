@@ -35,7 +35,7 @@ active
             @forelse($products as $index => $product)
               <tr> 
                 <td>{{ $index + 1}} </td>
-                <td>{{ $product->name}}</td>
+                <td>{{ $product->product_name}}</td>
                 <td>{{ $product->price}}/-</td>
                 <td>{{ $product->category->name}}</td>
                 <td><img src="{{ asset('uploads/product/'.$product->thumbnail)}}" alt="product Image" class="img-thumbnail" width="80"></td>

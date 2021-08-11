@@ -60,6 +60,18 @@
 									<li><a href="{{ url('change_password') }}">{{ __('Change Password') }}</a></li>
 								</ul>
 							</li>
+						
+							<li class="sidebar-item  has-sub  @yield('role_mgmt')">
+								<a href="#" class='sidebar-link'>
+									<i data-feather="triangle" width="20"></i> 
+									<span>{{ __('Role management') }}</span>
+								</a>
+								
+								<ul class="submenu ">
+									<li><a href="{{ url('add_role_and_permission') }}">{{ __('Add Role and Permission') }}</a></li>
+									<li><a href="{{ url('add_user_role') }}">{{ __('Add User Role') }}</a></li>
+								</ul>
+							</li>
 													
 							<li class="sidebar-item @yield('product_orders')">
 								<a href="{{ url('product_orders') }}" class='sidebar-link'>

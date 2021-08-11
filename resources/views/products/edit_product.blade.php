@@ -46,8 +46,8 @@ active
               </select>
             </div>
             <div class="form-group">
-              <label for="name">Product name</label>
-              <input type="text" name="name" value="{{$product->name}}" id="name" class="form-control @error('name') is-invalid @enderror">
+              <label for="product_name">Product name</label>
+              <input type="text" name="product_name" value="{{$product->product_name}}" id="product_name" class="form-control @error('product_name') is-invalid @enderror">
             </div>
             <div class="form-group">
               <label for="price">Price</label>

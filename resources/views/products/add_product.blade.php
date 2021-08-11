@@ -44,7 +44,7 @@ active
             </div>
             <div class="form-group">
               <label for="name">Product name</label>
-              <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror">
+              <input type="text" name="name" id="product_name" class="form-control @error('name') is-invalid @enderror">
             </div>
             <div class="form-group">
               <label for="price">Price</label>
@@ -75,7 +75,7 @@ active
               <label for="">Choose Multiple photo</label><br>
               <input type="file" name="multi_images[]" id="prodMultImage" multiple>
             </div>
-            <input class="btn btn-secondary" name="add" type="submit" value="Add">
+            <input class="btn btn-secondary" type="submit" value="Add">
             <a href="{{route('product.index')}}" class="btn btn-secondary">Product List</a>
           </form>
         </div>

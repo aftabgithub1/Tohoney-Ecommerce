@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -15,9 +15,5 @@ class CustomerController extends Controller
 		return view('customer_panel');
 	}
 
-	public function productOrders() {
-		$product_orders = Order::all();
-		return view('accounts.product_orders', compact('product_orders'));
-	}
 
 }

@@ -56,7 +56,7 @@
 								</div>
 							</div>
 							<div class="product-content">
-								<h3><a href="{{route('product.show', $product->slug)}}">{{$product->name}}</a></h3>
+								<h3><a href="{{route('product.show', $product->slug)}}">{{$product->product_name}}</a></h3>
 								<p class="pull-left">Tk. {{$product->price}}</p>
 								<ul class="pull-right d-flex">
 									<li><i class="fa fa-star"></i></li>

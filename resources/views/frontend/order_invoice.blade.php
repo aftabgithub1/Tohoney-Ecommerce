@@ -26,29 +26,44 @@
           <div class="card-body">
             <table class="table">
               <tr>
-                <th>Name</th>
-                <th> : </th>
-                <td>{{$order->name}}</td>
-              </tr>
-              <tr>
                 <th>Order No.</th>
                 <th> : </th>
-                <td>{{$order->id}}</td>
+                <td>{{$order_invoice->id}}</td>
+              </tr>
+              <tr>
+                <th>Customer</th>
+                <th> : </th>
+                <td>{{$order_invoice->name}}</td>
+              </tr>
+              <tr>
+                <th>Product Name</th>
+                <th> : </th>
+                <td>
+                  @foreach($product_details as $product)
+                    {{($product->product_name)}}<br>
+                    <!-- {{($product->product_name)}}@if (!$loop->last), @endif -->
+                  @endforeach
+                </td>
               </tr>
               <tr>
                 <th>Order Date</th>
                 <th> : </th>
-                <td>{{$order->created_at}}</td>
+                <td>{{$order_invoice->created_at}}</td>
               </tr>
               <tr>
                 <th>Subtotal</th>
                 <th> : </th>
-                <td>{{$order->subtotal}}</td>
+                <td>{{$order_invoice->subtotal}}</td>
+              </tr>
+              <tr>
+                <th>Discount</th>
+                <th> : </th>
+                <td>{{$order_invoice->discount}}</td>
               </tr>
               <tr>
                 <th>Total</th>
                 <th> : </th>
-                <td>{{$order->total}}</td>
+                <td>{{$order_invoice->total}}</td>
               </tr>
             </table>
           </div>

@@ -34,21 +34,23 @@ active
           @endif
           <table class="table mt-4">
             <tr>
-              <th>#</th>
               <th>Order ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Amount</th>
+              <th>Customer Name</th>
+              <th>Product Name</th>
+              <th>Subtotal</th>
+              <th>Discount</th>
+              <th>Total</th>
               <th>Payment Method</th>
               <th></th>
             </tr>
             @forelse($product_orders as $index => $product_order)
             <tr>
-              <td>{{ $index + 1}}</td>
               <td>{{ $product_order->id }}</td>
               <td>{{ $product_order->name }}</td>
-              <td>{{ $product_order->email}}</td>
-              <td>Tk. {{ $product_order->total}}</td>
+              <td>{{ $product_order->email }}</td>
+              <td>{{ "Tk. ".$product_order->subtotal }}</td>
+              <td>{{$product_order->discount ? "Tk. ".$product_order->discount : '' }}</td>
+              <td>{{ "Tk. ".$product_order->total }}</td>
               <td>{{ $product_order->payment == 1 ? 'Credit Card' : 'Cash'}}</td>
               <td class="text-right">
                 <div class="dropleft">
@@ -58,7 +60,7 @@ active
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{{route('order_invoice', $product_order->id)}}">View Invoice</a>
-                    <a class="dropdown-item" href="">Delete</a>
+                    <a class="dropdown-item" href="{{route('delete_order', $product_order->id)}}">Delete</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-primary" href="{{route('order_pdf', $product_order->id)}}">Download PDF</a>
                     <a class="dropdown-item text-primary" href="{{route('send_sms', $product_order->id)}}">Send SMS</a>

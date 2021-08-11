@@ -10,6 +10,7 @@ use App\Models\OrderList;
 use Carbon\Carbon;
 use Session;
 use Stripe;
+use Auth;
 
 class StripePaymentController extends Controller
 {
@@ -30,6 +31,7 @@ class StripePaymentController extends Controller
 			$carts = Cart::where('ip_address', request()->ip());
 			foreach($carts->get() as $cart) {
 				OrderList::insert([
+					'user_id' => Auth::id(),
 					'order_id' => $order_id,
 					'product_id' => $cart->product_id,
 					'quantity' => $cart->quantity,
