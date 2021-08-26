@@ -45,6 +45,7 @@ Route::get('faq', [FrontendController::class, 'faq']);
 Route::get('cart', [FrontendController::class, 'cart']);
 Route::get('cart/{coupon_name}', [FrontendController::class, 'apllyCoupon']);
 Route::get('shop', [FrontendController::class, 'shop']);
+Route::get('aboutus', [FrontendController::class, 'aboutus']);
 Route::match(['get', 'post'], 'checkout', [FrontendController::class, 'checkout'])->name('checkout');
 
 /**
