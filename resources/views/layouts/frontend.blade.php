@@ -78,9 +78,10 @@
                 <ul class="dropdown_style">
                   @auth
                   <li><a href="{{ url('/admin_panel') }}">{{ __('Admin Pannel') }}</a></li>
-                  <li><a href="cart.html">Cart</a></li>
-                  <li><a href="checkout.html">Checkout</a></li>
-                  <li><a href="wishlist.html">wishlist</a></li>
+                  <li><a href="{{ route('logout') }}"	onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+									<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+										@csrf
+									</form>
                   @else
                   <li><a href="{{ route('login') }}">Login</a></li>
                   <li><a href="{{ route('register') }}">Register</a></li>
@@ -98,8 +99,8 @@
 					<div class="col-lg-3 col-md-7 col-sm-6 col-6">
 						<div class="logo">
 							<a href="{{route('home')}}">
-						<img src="{{asset('frontend_assets/images/logo.png')}}" alt="">
-						</a>
+								<img src="{{asset('frontend_assets/images/logo.png')}}" alt="">
+							</a>
 						</div>
 					</div>
 					<div class="col-lg-7 d-none d-lg-block">

@@ -7,6 +7,7 @@ use App\Http\Requests\FaqRequest;
 use App\Models\User;
 use App\Models\Faq;
 use Auth;
+use DB;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -16,7 +17,7 @@ class AdminController extends Controller
 	}
 	
 	public function adminPanel() {
-		return view('admin_panel');
+		return view('layouts.accounts');
 	}
 
 

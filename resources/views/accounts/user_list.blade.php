@@ -24,10 +24,9 @@ active
 					<th scope="col">Created at</th>
 					<th scope="col" class="text-right"></th>
 				</tr>
-				@foreach($users as $index => $user)
+				@foreach($users as $key => $user)
 				<tr>
-					<!-- <td>{{ $loop->index + 1 }}</td> -->
-					<td>{{ $users->firstitem() + $index }}</td>
+					<td>{{ $users->firstitem() + $key }}</td>
 					<td>{{ $user->name }}</td>
 					<td>{{ $user->email }}</td>
 					<td>{{ $user->created_at->format('d-M-Y h:i:s A') }}</td>

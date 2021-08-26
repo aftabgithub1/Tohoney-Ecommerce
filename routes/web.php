@@ -121,14 +121,33 @@ Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('str
 /**
  * ROLE MANAGEMENT
  */
-Route::get('add_role_and_permission', [RoleMgmtController::class, 'addRoleAndPermission'])->name('add_role_and_permission');
-Route::post('role_create', [RoleMgmtController::class, 'roleCreate']);
-Route::post('permission_create', [RoleMgmtController::class, 'permissionCreate'])->name('add_role_and_permission');
-Route::post('add_user_role', [RoleMgmtController::class, 'addUserRole'])->name('add_user_role');
+Route::prefix('roles_and_permissions')->group(function() {
+  Route::get('/', [RoleMgmtController::class, 'rolesAndPermissions']);
+  Route::post('/create_role', [RoleMgmtController::class, 'createRole'])->name('create_role');
+  Route::post('/create_permission', [RoleMgmtController::class, 'createPermission'])->name('create_permission');
+  Route::get('role/delete/{role_id}', [RoleMgmtController::class, 'deleteRole'])->name('delete_role');
+  Route::get('permission/delete/{permission_id}', [RoleMgmtController::class, 'deletePermission'])->name('delete_permission');
+});
+
+Route::prefix('role_has_permissions')->group(function() {
+  Route::get('/', [RoleMgmtController::class, 'roleHasPermissions']);
+  Route::get('/view/{role_id}', [RoleMgmtController::class, 'roleHasPermissionsView'])->name('role_has_permissions_view');
+  Route::post('/store', [RoleMgmtController::class, 'roleHasPermissionsStore'])->name('role_has_permissions_store');
+  Route::get('/delete/{role_id}', [RoleMgmtController::class, 'roleHasPermissionDelete'])->name('role_has_permissions_delete');
+});
+
+Route::prefix('user_has_roles')->group(function() {
+  Route::get('/', [RoleMgmtController::class, 'userHasRoles']);
+  Route::get('/view/{user_id}', [RoleMgmtController::class, 'userHasRolesView'])->name('user_has_roles_view');
+  Route::post('/store', [RoleMgmtController::class, 'userHasRolesStore'])->name('user_has_roles_store');
+  Route::get('/edit/{user_id}', [RoleMgmtController::class, 'userHasRolesEdit'])->name('user_has_roles_edit');
+  Route::post('/update', [RoleMgmtController::class, 'userHasRolesUpdate'])->name('user_has_roles_update');
+  Route::get('/delete/{user_id}', [RoleMgmtController::class, 'userHasRolesDelete'])->name('user_has_roles_delete');
+});
 
 /**
  * RESOURCE CONTROLLERS
- */
+ */  
 /* 
 Routes for resource controller :
 Route::resource('category', CategoryController::class);

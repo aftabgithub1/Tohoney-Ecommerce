@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('page_title') {{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('page_title') {{ config('app.name') }}</title>
 
 
     <!-- Scripts -->
@@ -32,9 +32,17 @@
 		<div id="sidebar" class='active'>
 			<div class="sidebar-wrapper active">
 				<div class="sidebar-header text-center">
-					<a href="{{ route('home') }}">
-						<img src="{{ asset('dashboard_assets/images/icons8-a-64.png') }}" alt="" srcset="">
-					</a>
+					<div class="mb-2">
+						<a href="{{ route('home') }}">
+							<img src="{{ asset('frontend_assets/images/logo.png') }}" alt="" srcset="">
+						</a>
+					</div>
+					<div>
+						<h4>{{Auth::user()->name}}</h4>
+					</div>
+					<div>
+						<h4><small>{{authRoleName()}}</small></h4>
+					</div>
 				</div>
 				<div class="sidebar-menu">
 					<ul class="menu">
@@ -55,23 +63,29 @@
 								</a>
 								
 								<ul class="submenu ">
-									<li><a href="{{ url('user_list') }}">{{ __('User List') }}</a></li>
+									@can('panel_control')<li><a href="{{ url('user_list') }}">{{ __('User List') }}</a></li>@endcan
 									<li><a href="{{ url('profile') }}">{{ __('Profile') }}</a></li>
 									<li><a href="{{ url('change_password') }}">{{ __('Change Password') }}</a></li>
 								</ul>
 							</li>
-						
+
+
+									
+							@if(Auth::user()->role == 1)
+							
+							@can('panel_control')
 							<li class="sidebar-item  has-sub  @yield('role_mgmt')">
 								<a href="#" class='sidebar-link'>
 									<i data-feather="triangle" width="20"></i> 
 									<span>{{ __('Role management') }}</span>
 								</a>
-								
 								<ul class="submenu ">
-									<li><a href="{{ url('add_role_and_permission') }}">{{ __('Add Role and Permission') }}</a></li>
-									<li><a href="{{ url('add_user_role') }}">{{ __('Add User Role') }}</a></li>
+									<li><a href="{{ url('roles_and_permissions') }}">{{ __('Roles and Permissions') }}</a></li>
+									<li><a href="{{ url('role_has_permissions') }}">{{ __('Role has Permissions') }}</a></li>
+									<li><a href="{{ url('user_has_roles') }}">{{ __('User has Roles') }}</a></li>
 								</ul>
 							</li>
+							@endcan
 													
 							<li class="sidebar-item @yield('product_orders')">
 								<a href="{{ url('product_orders') }}" class='sidebar-link'>
@@ -79,8 +93,7 @@
 									<span>{{ __('Product Orders') }}</span>
 								</a>
 							</li>
-									
-							@if(Auth::user()->role == 1)
+
 							<li class="sidebar-item @yield('faq')">
 								<a href="{{ url('add_faq') }}" class='sidebar-link'>
 									<i data-feather="home" width="20"></i> 
@@ -96,9 +109,9 @@
 								
 								<ul class="submenu ">
 									<li><a href="{{ route('category.index') }}">{{ __('Category') }}</a></li>
-									<li><a href="{{ route('category.create') }}">{{ __('Add Category') }}</a></li>
+									@can('create')<li><a href="{{ route('category.create') }}">{{ __('Add Category') }}</a></li>@endcan
 									<li><a href="{{ route('product.index') }}">{{ __('Product') }}</a></li>
-									<li><a href="{{ route('product.create') }}">{{ __('Add Product') }}</a></li>
+									@can('create')<li><a href="{{ route('product.create') }}">{{ __('Add Product') }}</a></li>@endcan
 								</ul>
 							</li>
 						
@@ -169,9 +182,7 @@
 								<a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
 								<a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="{{ route('logout') }}"
-										onclick="event.preventDefault();
-																	document.getElementById('logout-form').submit();">
+								<a class="dropdown-item" href="{{ route('logout') }}"	onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 										<i data-feather="log-out"></i> {{ __('Logout') }}
 								</a>
 
@@ -235,5 +246,7 @@
 	<script src="{{asset('dashboard_assets/js/pages/fontawesome-5.15.2.min.js')}}"></script>
 
 	<script src="{{asset('dashboard_assets/js/main.js')}}"></script>
+	
+	@yield('script')
 </body>
 </html>

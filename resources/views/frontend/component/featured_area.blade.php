@@ -7,9 +7,9 @@
 						@foreach($categories as $category)
 						<div class="featured-wrap">
 							<div class="featured-img">
-								<img src="{{asset('uploads/category/'.$category->category_image)}}" alt="">
+								<img src="{{asset('uploads/category/'.$category->image)}}" alt="">
 								<div class="featured-content">
-									<a href="shop.html">{{$category->category_name}}</a>
+									<a href="shop.html">{{$category->name}}</a>
 								</div>
 							</div>
 						</div>
@@ -19,4 +19,3 @@
 			</div>
 		</div>
 	</div>
-	<!-- featured-area end -->

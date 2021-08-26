@@ -15,7 +15,11 @@ active
     <div class="col-lg-12 pl-2">
       <div class="card">
         <div class="card-body">
-          <div><span class="float-right mb-4"><a href="{{route('product.create')}}" class="btn btn-danger">Add product</a></span></div>
+          <div>
+            @can('create')
+            <span class="float-right mb-4"><a href="{{route('product.create')}}" class="btn btn-danger">Add product</a></span>
+            @endcan
+          </div>
 
           @if(session('product_delete_success'))
             <div class="alert alert-success mt-4">
@@ -52,13 +56,17 @@ active
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="#">View Details</a>
+                      @can('update')
                       <a class="dropdown-item" href="{{ route('product.edit', $product->id) }}">Edit</a>
                       <a class="dropdown-item" href="{{ url('edit_multiple_images/'. $product->id) }}">Edit multiple images</a>
+                      @endcan
+                      @can('delete')
                       <form action="{{ route('product.destroy', $product->id) }}" method="post">
                         @method('delete')
                         @csrf
                         <input class="dropdown-item" type="submit" value="Delete">
                       </form>
+                      @endcan
                     </div>
                   </div>
                 </td>

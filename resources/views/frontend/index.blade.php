@@ -62,8 +62,9 @@
 	</div>
 	<!-- slider-area end -->
 
-	@component('frontend.component.featured_area', ['categories' => $categories])
-	@endcomponent
+	<!-- featured-area start -->
+	@component('frontend.component.featured_area', ['categories' => $categories])	@endcomponent
+	<!-- featured-area end -->
 
 	<!-- start count-down-section -->
 	<div class="count-down-area count-down-area-sub">

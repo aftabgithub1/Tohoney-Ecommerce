@@ -14,7 +14,12 @@ active
   <div class="row justify-content-center">
     <div class="col-lg-12 pl-2">
       <div class="card">
-        <div class="card-header">Category Table<span class="float-right"><a href="{{route('category.create')}}" class="btn btn-danger">Add Category</a></span></div>
+        <div class="card-header">
+          Category Table
+          @can('create')
+          <span class="float-right"><a href="{{route('category.create')}}" class="btn btn-danger">Add Category</a></span>
+          @endcan
+        </div>
         <div class="card-body">
           @if(session('delete_warning'))
             <div class="alert alert-success mt-4">
@@ -54,12 +59,16 @@ active
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">View Details</a>
+                    @can('update')
                     <a class="dropdown-item" href="{{ route('category.edit', $category->id) }}">Edit</a>
+                    @endcan
+                    @can('delete')
                     <form action="{{ route('category.destroy', $category->id) }}" method="post">
                       @method('delete')
                       @csrf
                       <input class="dropdown-item" type="submit" value="Delete">
                     </form>
+                    @endcan
                   </div>
                 </div>
               </td>

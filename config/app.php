@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel Project 2'),
+    'name' => env('APP_NAME', 'Tohoney'),
 
     /*
     |--------------------------------------------------------------------------
