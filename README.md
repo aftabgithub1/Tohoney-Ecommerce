@@ -6,6 +6,7 @@ In the users table, there is a column named 'role'. Customer role is auto create
 * Stripe
 * DomPDF
 * Bulk SMS
+* Spatie Laravel-permission
 
 
 
